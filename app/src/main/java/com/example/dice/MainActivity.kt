@@ -16,10 +16,18 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         val rollButton: Button = findViewById(R.id.roll_button)
         rollButton.setOnClickListener{ rollDice() }
+
         val resultText: TextView = findViewById(R.id.result_text)
         resultText.text = "Dice Rolled!"
 
+        val resetButton: Button = findViewById(R.id.reset_button)
+        resetButton.setOnClickListener { reset() }
 
+
+    }
+    private fun reset(){
+        val resultText: TextView = findViewById(R.id.result_text)
+        resultText.text = "0"
     }
     private fun rollDice(){
         val randomInt = java.util.Random().nextInt(6)+1
