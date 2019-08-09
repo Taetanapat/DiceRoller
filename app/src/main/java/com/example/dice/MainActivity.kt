@@ -3,6 +3,7 @@ package com.example.dice
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_main.*
@@ -10,6 +11,7 @@ import kotlin.random.Random
 import java.util.*
 
 class MainActivity : AppCompatActivity() {
+   lateinit var diceImage:ImageView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -17,8 +19,8 @@ class MainActivity : AppCompatActivity() {
         val rollButton: Button = findViewById(R.id.roll_button)
         rollButton.setOnClickListener{ rollDice() }
 
-        val resultText: TextView = findViewById(R.id.result_text)
-        resultText.text = "Dice Rolled!"
+        //val resultText: TextView = findViewById(R.id.result_text)
+        //resultText.text = "Dice Rolled!"
 
         val resetButton: Button = findViewById(R.id.reset_button)
         resetButton.setOnClickListener { reset() }
@@ -26,13 +28,25 @@ class MainActivity : AppCompatActivity() {
 
     }
     private fun reset(){
-        val resultText: TextView = findViewById(R.id.result_text)
-        resultText.text = "0"
+       // val resultText: TextView = findViewById(R.id.result_text)
+        //resultText.text = "0"
+        diceImage = findViewById(R.id.dice_image)
+        val drawableResource = R.drawable.empty_dice
+        diceImage.setImageResource(drawableResource)
     }
     private fun rollDice(){
         val randomInt = java.util.Random().nextInt(6)+1
-        val resultText: TextView = findViewById(R.id.result_text)
-        resultText.text = randomInt.toString()
-        Toast.makeText(this,"Button clicked",Toast.LENGTH_SHORT).show()
+        diceImage = findViewById(R.id.dice_image)
+        val drawableResource = when(randomInt){
+            1 -> R.drawable.dice_1
+            2 -> R.drawable.dice_2
+            3 -> R.drawable.dice_3
+            4 -> R.drawable.dice_4
+            5 -> R.drawable.dice_5
+            else -> R.drawable.dice_6
+        }
+        diceImage.setImageResource(drawableResource)
+        //resultText.text = randomInt.toString()
+        //Toast.makeText(this,"Button clicked",Toast.LENGTH_SHORT).show()
     }
 }
